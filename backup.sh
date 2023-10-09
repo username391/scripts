@@ -14,9 +14,8 @@ IGNORED_ITEMS=(
 	"work"
 	"projects"
 )
-EXCLUDE=""
 
-# Перебираем игнорируемые элементы и добавляем их в строку параметров --exclude
+EXCLUDE=""
 for item in "${IGNORED_ITEMS[@]}"; do
     EXCLUDE+=" --exclude=$item"
 done
