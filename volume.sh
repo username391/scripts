@@ -42,7 +42,7 @@ function send_notification {
 		notify-send "silient mode" -i "$icon" -a "volume.sh"
 	else
 		bar=$(seq -s "─" $(($volume/3)) | sed 's/[0-9]//g')
-		notify-send "$bar" -i "$icon" -t 2000 -a "volume.sh"
+		notify-send "[$volume] $bar" -i "$icon" -t 2000 -a "volume.sh"
 	fi
 
 }
