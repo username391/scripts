@@ -44,7 +44,7 @@ fi
 if [ -d "$HOME/.zsh/themes/powerlevel10k" ]; then
 	echo "P10K theme already installed"
 else
-	git clone --depth=1 "https://github.com/romkatv/powerlevel10k.git $HOME/.zsh/themes/powerlevel10k"
+	git clone --depth=1 "https://github.com/romkatv/powerlevel10k.git" "$HOME/.zsh/themes/powerlevel10k"
 fi
 
 
