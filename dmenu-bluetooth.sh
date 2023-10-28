@@ -323,7 +323,7 @@ DMENU_BLUETOOTH_LAUNCHER="${DMENU_BLUETOOTH_LAUNCHER:-dmenu}"
 run_dmenu() {
     case "$DMENU_BLUETOOTH_LAUNCHER" in
         rofi)
-            DMENU_BLUETOOTH_LAUNCHER="rofi -dmenu"
+            DMENU_BLUETOOTH_LAUNCHER="rofi -dmenu -theme launchpad"
             ;;
         fuzzel)
             DMENU_BLUETOOTH_LAUNCHER="fuzzel --dmenu"
