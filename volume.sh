@@ -36,6 +36,11 @@ function send_notification {
 		icon=$audio_high
 	fi
 
+	if [[ $volume -gt 100 ]]; then
+		volume=100
+		pactl set-sink-volume @DEFAULT_SINK@ 100%
+	fi
+
 	if [[ "$muted" = "yes" ]]; then
 		notify-send "volume muted" -i "$audio_muted" -a "volume.sh"
 	elif [[ "$volume" = "0" ]]; then
