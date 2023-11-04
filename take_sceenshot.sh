@@ -1,20 +1,31 @@
 #!/bin/bash
 
 arguments=''
+filename="Pictures/Screenshots/$(date +%s%3N).png"
+full_path="$HOME/$filename"
+rel_path="~/$filename"
+
 
 if [[ $@ == *'--area'* ]]; then
-    # Wait for a brief moment to give the user time to select the area manually
-    sleep 1
-    arguments='-s '
+	arguments='-s -o '
 fi
 
-if [[ $@ == *'--clipboard'* ]]; then
-    notify-send "head" "$arguments"
-    # Use the scrot command directly without the -s option for area selection
-    scrot $arguments -e 'xclip -selection clipboard -t image/png -i $f && rm $f'
-    notify-send "Screenshot" "Copied to clipboard"
+if [[ $@ == *'--window'* ]]; then
+	if [[ $@ == *'--clipboard'* ]]; then
+		maim -o -st 9999999 | convert - \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -layers merge +repage png:- | xclip -selection clipboard -t image/png
+		notify-send -i "image-gif" "Screenshot of window saved!" "to clipboard"
+	else
+		maim -o -st 9999999 | convert - \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -layers merge +repage $full_path
+		notify-send -i "image-gif" "Screenshot saved!" "$rel_path"
+	fi
+
 else
-    scrot $arguments ~/Pictures/%b%d_%H_%M_%S.png
-    notify-send "Screenshot" "Screenshot saved!"
+	if [[ $@ == *'--clipboard'* ]]; then
+		maim $arguments | xclip -selection clipboard -t image/png
+		notify-send -i "image-gif" "Screenshot saved!" "to clipboard"
+	else
+		maim $arguments $full_path
+		notify-send -i "image-gif" "Screenshot saved!" "$rel_path"
+	fi
 fi
 
