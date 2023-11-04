@@ -1,13 +1,13 @@
 #!/bin/bash
 
-arguments=''
+arguments='-b 3 '
 filename="Pictures/Screenshots/$(date +%s%3N).png"
 full_path="$HOME/$filename"
 rel_path="~/$filename"
 
 
 if [[ $@ == *'--area'* ]]; then
-	arguments='-s -o '
+	arguments+='-s -o '
 fi
 
 if [[ $@ == *'--window'* ]]; then
