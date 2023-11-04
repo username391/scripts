@@ -1,4 +1,4 @@
 #!/bin/bash
 
-paplay ~/scripts/src/notification-4.wav
+paplay ~/scripts/src/notification-0.wav
 
