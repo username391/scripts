@@ -191,12 +191,16 @@ print_status() {
 
         for device in "${paired_devices[@]}"; do
             if device_connected "$device"; then
+				# to show battery info turn Experimental to true
+				# in /etc/bluetooth/main.conf
+
                 device_alias="$(bluetoothctl info "$device" | grep -F "Alias" | cut -d ' ' -f 2-)"
+				battery_info="$(bluetoothctl info "$device" | grep -F "Battery Percentage" | awk '{print $NF}' | tr -d '()')"
 
                 if [ $counter -gt 0 ]; then
-                    printf ", %s" "$device_alias"
+                    printf ", %s" "$device_alias"  "$battery_info%"
                 else
-                    printf " %s" "$device_alias"
+                    printf " %s" "$device_alias"  "$battery_info%"
                 fi
 
                 ((counter++))
